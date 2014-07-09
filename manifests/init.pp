@@ -83,6 +83,7 @@ ProxyPassReverse / http://127.0.0.1:5601/
 
   class { 'logstash_shim::log_processor::client':
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
+    require => Class['logstash','logstash_shim::log_processor'],
   }
 
   if $enable_recheck {
