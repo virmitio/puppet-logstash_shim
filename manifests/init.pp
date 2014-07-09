@@ -90,7 +90,7 @@ ProxyPassReverse / http://127.0.0.1:5601/
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
   }
 
-  class { 'elastic_recheck::bot':
+  class { 'logstash_shim::elastic_recheck::bot':
     gerrit_host                     => $gerrit_host,
     gerrit_ssh_private_key          => $gerrit_ssh_private_key,
     gerrit_ssh_private_key_contents => $gerrit_ssh_private_key_contents,
