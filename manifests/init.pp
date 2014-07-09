@@ -17,12 +17,12 @@
 #
 class logstash_shim (
   $enable_recheck = false,
-  $gerrit_host,
-  $gerrit_ssh_private_key,
-  $gerrit_ssh_private_key_contents,
+  $gerrit_host = undef,
+  $gerrit_ssh_private_key = undef,
+  $gerrit_ssh_private_key_contents = undef,
   #not used today, will be used when elastic-recheck supports it.
-  $elasticsearch_url,
-  $recheck_bot_passwd,
+  $elasticsearch_url = undef,
+  $recheck_bot_passwd = undef,
   $recheck_bot_nick = 'openstackrecheck',
 #  $elasticsearch_nodes = [],
 #  $gearman_workers = [],
