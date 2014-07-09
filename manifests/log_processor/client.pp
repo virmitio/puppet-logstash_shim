@@ -25,14 +25,14 @@ class logstash_shim::log_processor::client (
     fail('Must provide either $config_file or $config_content to this class.')
   }
   
-  if !defined(File['/etc/logstash']){
-    file { '/etc/logstash':
-      ensure => directory,
-      owner  => 'logstash',
-      group  => 'logstash',
-      mode   => '0644',
-    }
-  }
+#  if !defined(File['/etc/logstash']){
+#    file { '/etc/logstash':
+#      ensure => directory,
+#      owner  => 'logstash',
+#      group  => 'logstash',
+#      mode   => '0644',
+#    }
+#  }
 
   file { '/etc/logstash/jenkins-log-client.yaml':
     ensure  => present,
