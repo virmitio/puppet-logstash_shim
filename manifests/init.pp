@@ -16,6 +16,7 @@
 # Logstash web frontend glue class.
 #
 class logstash_shim (
+  $enable_recheck = false,
   $gerrit_host,
   $gerrit_ssh_private_key,
   $gerrit_ssh_private_key_contents,
@@ -90,12 +91,14 @@ ProxyPassReverse / http://127.0.0.1:5601/
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
   }
 
-  class { 'logstash_shim::elastic_recheck::bot':
-    gerrit_host                     => $gerrit_host,
-    gerrit_ssh_private_key          => $gerrit_ssh_private_key,
-    gerrit_ssh_private_key_contents => $gerrit_ssh_private_key_contents,
-    elasticsearch_url               => $elasticsearch_url,
-    recheck_bot_passwd              => $recheck_bot_passwd,
-    recheck_bot_nick                => $recheck_bot_nick,
+  if $enable_recheck {
+    class { 'logstash_shim::elastic_recheck::bot':
+      gerrit_host                     => $gerrit_host,
+      gerrit_ssh_private_key          => $gerrit_ssh_private_key,
+      gerrit_ssh_private_key_contents => $gerrit_ssh_private_key_contents,
+      elasticsearch_url               => $elasticsearch_url,
+      recheck_bot_passwd              => $recheck_bot_passwd,
+      recheck_bot_nick                => $recheck_bot_nick,
+    }
   }
 }
