@@ -39,12 +39,6 @@ class logstash_shim (
 #    sysadmins                 => $sysadmins,
 #  }
 
-  class { 'logstash::web':
-    frontend            => 'kibana',
-    discover_nodes      => $discover_nodes,
-    proxy_elasticsearch => true,
-  }
-
   include apache
   include apache::mod::proxy
   include apache::mod::proxy_http
