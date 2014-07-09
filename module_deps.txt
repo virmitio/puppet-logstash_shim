@@ -1,0 +1,5 @@
+logrotate
+python
+apache
+kibana
+logstash

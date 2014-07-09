@@ -1,0 +1,123 @@
+source-url: http://logs.openstack.tld
+
+# List of zmq event inputs.
+zmq-publishers:
+  - tcp://jenkins.openstack.tld:8888
+
+# List of files to source logs from.
+source-files:
+  - name: console.log
+    retry-get: True
+  - name: devstack_logs/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-h-api-cfn.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-h-api-cw.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-h-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-h-eng.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-key.txt
+    tags:
+      - screen
+      - keystonefmt
+  - name: devstack_logs/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-n-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: devstack_logs/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: devstack_logs/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: devstack_logs/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+# TODO(clarkb) Add swift proxy logs here.
+  - name: Hyper-V_logs/hv-compute1/nova-console.log
+    tags:
+      - hyperv
+  - name: Hyper-V_logs/hv-compute1/neutron-hyperv-agent-console.log
+    tags:
+      - hyperv
+  - name: Hyper-V_logs/hv-compute2/nova-console.log
+    tags:
+      - hyperv
+  - name: Hyper-V_logs/hv-compute2/neutron-hyperv-agent-console.log
+    tags:
+      - hyperv
