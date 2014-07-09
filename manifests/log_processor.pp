@@ -59,7 +59,7 @@ class logstash_shim::log_processor (
     package { 'gear':
       ensure   => latest,
       provider => 'pip',
-      require  => Package['pip'],
+      require  => Class['python'],
     }
 #  }
 
