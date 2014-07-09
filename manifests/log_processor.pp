@@ -51,7 +51,6 @@ class logstash_shim::log_processor (
 
   if !defined(Class['python']){
     class { 'python':
-      ensure => present,
       pip    => true,
     }
   }
