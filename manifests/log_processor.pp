@@ -60,15 +60,14 @@ class logstash_shim::log_processor (
     package { 'gear':
       ensure   => latest,
       provider => 'pip',
-      require  => Class['pip'],
+      require  => Package['pip'],
     }
 #  }
 
   file { '/var/lib/crm114':
     ensure  => directory,
-    owner   => 'logstash',
-    group   => 'logstash',
-    require => User['logstash'],
+    owner   => 'root',
+    group   => 'root',
   }
   
   if $classifier_template {

@@ -45,9 +45,15 @@ class logstash_shim (
   include apache::mod::rewrite
   
   $inst_java = !defined(Class['Java'])
+  
+  yumrepo { 'logstash-1.4':
+    baseurl => 'http://packages.elasticsearch.org/logstash/1.4/centos',
+    enabled => 1,
+  }
     
   class { 'logstash':
     java_install => $inst_java,
+    require => Yumrepo['logstash-1.4'],
   }
   
   $rewrite_node = $discover_nodes[0]
@@ -79,7 +85,9 @@ ProxyPassReverse / http://127.0.0.1:5601/
   
   class { 'kibana': }
   
-  class { 'logstash_shim::log_processor': }
+  class { 'logstash_shim::log_processor':
+    require => Class['logstash'],
+  }
 
   class { 'logstash_shim::log_processor::client':
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
