@@ -49,12 +49,12 @@ class logstash_shim::log_processor (
     }
 #  }
 
-#  if !defined(Package['python']){
-    package { 'python':
+  if !defined(Class['python']){
+    class { 'python':
       ensure => present,
       pip    => true,
     }
-#  }
+  }
 
 #  if !defined(Package['gear']){
     package { 'gear':
