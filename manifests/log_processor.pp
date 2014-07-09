@@ -72,19 +72,19 @@ class logstash_shim::log_processor (
   }
   
   if $classifier_template {
-    $real_classifier_source = undef,
+    $real_classifier_source = undef
   } else {
-    $real_classifier_source = $classifier_source,
+    $real_classifier_source = $classifier_source
   }
   if $gearman_client_script_template {
-    $real_gearman_client_script_source = undef,
+    $real_gearman_client_script_source = undef
   } else {
-    $real_gearman_client_script_source = $gearman_client_script_source,
+    $real_gearman_client_script_source = $gearman_client_script_source
   }
   if $gearman_worker_script_template {
-    $real_gearman_worker_script_source = undef,
+    $real_gearman_worker_script_source = undef
   } else {
-    $real_gearman_worker_script_source = $gearman_worker_script_source,
+    $real_gearman_worker_script_source = $gearman_worker_script_source
   }
 
   file { '/usr/local/bin/classify-log.crm':
