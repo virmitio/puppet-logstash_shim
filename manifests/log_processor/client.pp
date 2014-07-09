@@ -63,17 +63,14 @@ class logstash_shim::log_processor::client (
     require    => File['/etc/init.d/jenkins-log-client'],
   }
 
-  include logrotate
-  logrotate::file { 'log-client-debug.log':
-    log     => '/var/log/logstash/log-client-debug.log',
-    options => [
-      'compress',
-      'copytruncate',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
+  logrotate::rule { 'log-client-debug.log':
+    path     => '/var/log/logstash/log-client-debug.log',
+    compress => true,
+    copytruncate => true,
+    missingok => true,
+    rotate => 7,
+    rotate_every => 'day',
+    ifempty => false,
     require => Service['jenkins-log-client'],
   }
 }
