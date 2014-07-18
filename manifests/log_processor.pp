@@ -25,29 +25,28 @@ class logstash_shim::log_processor (
   $gearman_worker_script_template = undef,
 ) {
 
-#  if !defined(Package['python-daemon']){
     package { 'python-daemon':
       ensure => present,
     }
-#  }
   
-#  if !defined(Package['python-zmq']){
     package { 'python-zmq':
       ensure => present,
     }
-#  }
-  
-#  if !defined(Package['python-yaml']){
-    package { 'python-yaml':
+
+  $yaml_pkg = $::osfamily ? {
+    'RedHat' => 'PyYAML',
+    default  => 'python-yaml'
+  }
+
+    package { $yaml_pkg:
       ensure => present,
+#      provider => pip,
+#      require  => Class['python'],
     }
-#  }
   
-#  if !defined(Package['crm114']){
     package { 'crm114':
       ensure => present,
     }
-#  }
 
   if !defined(Class['python']){
     class { 'python':
@@ -58,7 +57,7 @@ class logstash_shim::log_processor (
 #  if !defined(Package['gear']){
     package { 'gear':
       ensure   => latest,
-      provider => 'pip',
+      provider => pip,
       require  => Class['python'],
     }
 #  }
@@ -107,7 +106,7 @@ class logstash_shim::log_processor (
     require => [
       Package['python-daemon'],
       Package['python-zmq'],
-      Package['python-yaml'],
+      Package[$yaml_pkg],
       Package['gear'],
     ],
   }
@@ -122,7 +121,7 @@ class logstash_shim::log_processor (
     require => [
       Package['python-daemon'],
       Package['python-zmq'],
-      Package['python-yaml'],
+      Package[$yaml_pkg],
       Package['gear'],
     ],
   }

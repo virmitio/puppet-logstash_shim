@@ -45,15 +45,25 @@ class logstash_shim (
   include apache::mod::rewrite
   
   $inst_java = !defined(Class['Java'])
-  
-  yumrepo { 'logstash-1.4':
-    baseurl => 'http://packages.elasticsearch.org/logstash/1.4/centos',
-    enabled => 1,
+
+  if $::osfamily=='RedHat'{
+    exec { 'logstash-gpg-key':
+      command => 'rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch',
+      path    => ['/usr/bin', '/bin'],
+      before  => Yumrepo['logstash-1.4'],
+    }
+
+    yumrepo { 'logstash-1.4':
+      baseurl => 'http://packages.elasticsearch.org/logstash/1.4/centos',
+      gpgcheck => 1,
+      gpgkey => 'http://packages.elasticsearch.org/GPG-KEY-elasticsearch',
+      enabled => 1,
+      before  => Class['logstash'],
+    }
   }
     
   class { 'logstash':
     java_install => $inst_java,
-    require => Yumrepo['logstash-1.4'],
   }
   
   $rewrite_node = $discover_nodes[0]

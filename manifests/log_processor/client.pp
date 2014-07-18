@@ -49,7 +49,7 @@ class logstash_shim::log_processor::client (
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
-    source  => 'puppet:///modules/log_processor/jenkins-log-client.init',
+    source  => 'puppet:///modules/logstash_shim/default-jenkins-log-client.init',
     require => [
       File['/usr/local/bin/log-gearman-client.py'],
       File['/etc/logstash/jenkins-log-client.yaml'],
